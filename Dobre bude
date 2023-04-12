@@ -1,0 +1,97 @@
+fr = open("input.gol",'r')
+
+def create2Dmatrix(width, height):
+    matrix=[]
+    temp=[]
+    for y in range(height):
+        temp=[]
+        for x in range(width):
+            temp.append(0)
+        matrix.append(temp)
+    return matrix
+
+def processfile(matrix):
+    x = 0
+    y = 0
+    for row in fr:
+        x=0
+        for char in row:
+            if char=='1':
+                matrix[y][x]=1
+            x+=1
+        y+=1
+
+def return_friends(x,y,matrix):
+    #matrix najprv ide y potom ide x
+    #navrhnem seriu ifov aby to fungovalo
+    count = 0
+    if x>0 and y>0 or x<5 and y<3:
+        if matrix[y][x+1] == '1':
+            count +=1
+        if matrix[y-1][x+1]== '1':
+            count += 1
+        if matrix[y - 1][x] == '1':
+            count += 1
+        if matrix[y -1][x -1] == '1':
+            count += 1
+        if matrix[y][x - 1] == '1':
+            count += 1
+        if matrix[y+1][x - 1] == '1':
+            count += 1
+        if matrix[y+1][x] == '1':
+            count += 1
+        if matrix[y+1][x + 1] == '1':
+            count += 1
+        #return count
+    if x ==0 and y==0:
+        if matrix[y - 1][x] == '1':
+            count += 1
+        if matrix[y -1][x +1] == '1':
+            count += 1
+        if matrix[y][x+1] == '1':
+            count +=1
+        #return count
+    if x == 0 and 0<y<3:
+        if matrix[y - 1][x] == '1':
+            count += 1
+        if matrix[y -1][x +1] == '1':
+            count += 1
+        if matrix[y][x+1] == '1':
+            count +=1
+        if matrix[y+1][x] == '1':
+            count += 1
+    if x==0 and y==5:
+        if matrix[y][x + 1] == '1':
+            count += 1
+        if matrix[y + 1][x] == '1':
+            count += 1
+        if matrix[y+1][x + 1] == '1':
+            count += 1
+    if 0<x<5 and y == 0:
+        if matrix[y][x+1] == '1':
+            count +=1
+        if matrix[y-1][x+1]== '1':
+            count += 1
+        if matrix[y - 1][x] == '1':
+            count += 1
+        if matrix[y -1][x -1] == '1':
+            count += 1
+        if matrix[y][x - 1] == '1':
+            count += 1
+    if x == 0 and y == 3:
+
+    return count
+
+
+
+
+width, height=fr.readline().split(' ')
+width = int(width)
+height = int(height)
+#vytvori 2rozmer zoznam plny nul
+oldfield= create2Dmatrix(width,height)
+#vytvori iny 2rozmer zoznam plny nul
+newfield = create2Dmatrix(width,height)
+#do prveho zoznamu nahodime jednotky zo suboru
+processfile(oldfield)
+print(oldfield)
